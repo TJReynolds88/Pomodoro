@@ -1,6 +1,6 @@
 
 let countdown = 0;
-let seconds = 1500; // 25mins in seconds
+let seconds = 1500; // Seconds left on the clock
 let workTime = 25;
 let breakTime = 5;
 let isBreak = true;
@@ -8,7 +8,7 @@ let isPaused = true;
 
 
 const status = document.querySelector("#status");
-const timerDisplay = document.querySelector("timerDisplay");
+const timerDisplay = document.querySelector(".timerDisplay");
 const startBtn = document.querySelector("#start-btn");
 const resetBtn = document.querySelector("#reset");
 const workMin = document.querySelector("#work-min");
@@ -26,7 +26,7 @@ startBtn.addEventListener('click', () => {
     }
 })
 
-resetBtn.addEventListener('click',() => {
+resetBtn.addEventListener('click', () => {
     clearInterval(countdown);
     seconds = workTime * 60;
     countdown = 0;
@@ -38,10 +38,10 @@ resetBtn.addEventListener('click',() => {
 
 function timer() {
     seconds --;
-    if(seconds < 0) {
+    if (seconds < 0) {
         clearInterval(countdown);
         seconds = (isBreak ? breakTime : workTime)* 60;
-        isBreak = !isBreak;
+                isBreak = !isBreak;
         countdown = setInterval(timer, 1000);
     }
 }
@@ -55,7 +55,7 @@ let incrementFunctions = {
     workTime = Math.min(workTime + increment, 60)},
     "#work-minus": function () {
     workTime = Math.max( workTime - increment, 5)},
-    "break-plus": function () {
+    "#break-plus": function () {
     breakTime = Math.min(breakTime + increment, 60)},
     "#break-minus": function () {
     breakTime = Math.max( breakTime - increment, 5)}};
@@ -71,7 +71,7 @@ for (var key in incrementFunctions) {
 function countdownDisplay () {
     let minutes = Math.floor(seconds / 60);
     let remainderSeconds = seconds % 60;
-    timerDisplay.textContent = `${minutes}:${remainderSeconds < 10 ? '0': ''}${remainderSeconds}`;
+    timerDisplay.textContent = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
 }
 
 function buttonDisplay() {
@@ -92,6 +92,6 @@ function updateHTML() {
     breakMin.textContent = breakTime;
 }
 
-window.setInterval(updateHTML,100);
+window.setInterval(updateHTML, 100);
 
 document.onclick = updateHTML;
